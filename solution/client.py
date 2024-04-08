@@ -1,20 +1,33 @@
-
 import requests
 import json
 
 url = "http://localhost:8000"
+# Crear una partida
+print("\n***** crear una partida ****\n")
+response = requests.post(url=url + "/guess", json={"player": "Julian"})
+print(response.json())
 
-# Crear una partida nueva
-response = requests.post(url=url + "/guess", json={"player": "Julian"}, headers={"Content-Type": "application/json"})
-print("Respuesta de crear partida:", response.json())
 
 # Listar todas las partidas
+print("\n***** Listar todas las partidas ****\n")
 response = requests.get(url=url + "/guess")
 print(response.json())
 
-# Buscar una partida por su id
-game_id = 1  
-response = requests.get(url=url + f"/guess/{game_id}")
+#Actualizar los intentos de una partida
+print("\n***** Actualizar los intentos de una partida ****\n")
+response = requests.put(url=url + f"/guess/1", json={"attempt": 25})
 print(response.json())
+
+# Eliminar una partida.
+print("\n***** eliminar una partida ****\n")
+response = requests.delete(url=url + f"/guess/1")
+print(response.json())
+
+# Listar todas las partidas
+print("\n***** Lista actual de las partidas ****\n")
+response = requests.get(url=url + "/guess")
+print(response.json())
+
+
 
 
